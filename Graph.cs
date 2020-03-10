@@ -68,7 +68,6 @@ namespace src
             int result = Convert.ToInt32(-4 * Math.Log(( (this.population * N.travelProb - 1) / (this.population - 1)), Math.Exp(1)));
             System.Console.WriteLine("Populasi : " + this.population);
             System.Console.WriteLine("Probability : " + N.travelProb);
-            // System.Console.WriteLine("Pembilang : " + this.population *);
             System.Console.WriteLine("Lama Infeksi : " + result);
             return result;
         }
@@ -93,21 +92,7 @@ namespace src
         {
             this.neighborName = neighborName;
             this.travelProb = travelProb;
-   
         }
-
-        // public void isInfected(double infectedPopulation) //parameter city asal
-        // {
-        //     double S = infectedPopulation * travelProb;
-        //     if (S > 1) 
-        //     {
-        //         this.infected = true;    
-        //         
-                //  city.infectedDay = -4 * Math.log((city.population/infectedPopulation - 1) * (1/(x-1)));
-                // 
-        //     }
-        // }
-        
     }
 
     class Graph 
@@ -292,9 +277,7 @@ namespace src
                 form.ShowDialog();
                 
             }
-            this.printAll();
-
-            
+            this.printAll();   
         }
     }
 }
