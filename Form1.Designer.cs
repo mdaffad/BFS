@@ -28,24 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.Date = new System.Windows.Forms.Label();
             this.Clock = new System.Windows.Forms.Label();
             this.ContactButton = new FontAwesome.Sharp.IconButton();
             this.GraphButton = new FontAwesome.Sharp.IconButton();
             this.HomeButton = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.HMIF = new System.Windows.Forms.PictureBox();
+            this.exitButton = new FontAwesome.Sharp.IconButton();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.Date = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelMenu.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HMIF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panel5.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,16 +69,28 @@
             this.panelMenu.Size = new System.Drawing.Size(200, 579);
             this.panelMenu.TabIndex = 7;
             // 
+            // Date
+            // 
+            this.Date.AutoSize = true;
+            this.Date.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Date.Font = new System.Drawing.Font("Century Gothic", 7F);
+            this.Date.ForeColor = System.Drawing.Color.SeaShell;
+            this.Date.Location = new System.Drawing.Point(0, 539);
+            this.Date.Name = "Date";
+            this.Date.Size = new System.Drawing.Size(37, 17);
+            this.Date.TabIndex = 5;
+            this.Date.Text = "DATE";
+            // 
             // Clock
             // 
-            this.Clock.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Clock.AutoSize = true;
+            this.Clock.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Clock.ForeColor = System.Drawing.Color.SeaShell;
-            this.Clock.Location = new System.Drawing.Point(52, 509);
+            this.Clock.Location = new System.Drawing.Point(0, 556);
             this.Clock.Name = "Clock";
-            this.Clock.Size = new System.Drawing.Size(86, 23);
+            this.Clock.Size = new System.Drawing.Size(51, 23);
             this.Clock.TabIndex = 4;
-            this.Clock.Text = "00:00:00";
+            this.Clock.Text = "TIME";
             // 
             // ContactButton
             // 
@@ -164,6 +181,24 @@
             this.HMIF.TabStop = false;
             this.HMIF.Click += new System.EventHandler(this.HMIF_Click);
             // 
+            // exitButton
+            // 
+            this.exitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.exitButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
+            this.exitButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(1)))), ((int)(((byte)(31)))));
+            this.exitButton.IconChar = FontAwesome.Sharp.IconChar.Times;
+            this.exitButton.IconColor = System.Drawing.Color.SeaShell;
+            this.exitButton.IconSize = 26;
+            this.exitButton.Location = new System.Drawing.Point(1086, 0);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Rotation = 0D;
+            this.exitButton.Size = new System.Drawing.Size(31, 26);
+            this.exitButton.TabIndex = 1;
+            this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // fileSystemWatcher1
             // 
             this.fileSystemWatcher1.EnableRaisingEvents = true;
@@ -172,6 +207,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(10)))), ((int)(((byte)(41)))));
+            this.panel5.Controls.Add(this.panel2);
             this.panel5.Controls.Add(this.panel1);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(24)))), ((int)(((byte)(58)))));
@@ -180,17 +216,14 @@
             this.panel5.Size = new System.Drawing.Size(1117, 579);
             this.panel5.TabIndex = 11;
             // 
-            // Date
+            // panel2
             // 
-            this.Date.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.Date.AutoSize = true;
-            this.Date.Font = new System.Drawing.Font("Century Gothic", 7F);
-            this.Date.ForeColor = System.Drawing.Color.SeaShell;
-            this.Date.Location = new System.Drawing.Point(27, 539);
-            this.Date.Name = "Date";
-            this.Date.Size = new System.Drawing.Size(56, 17);
-            this.Date.TabIndex = 5;
-            this.Date.Text = "00:00:00";
+            this.panel2.Controls.Add(this.exitButton);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1117, 26);
+            this.panel2.TabIndex = 1;
             // 
             // panel1
             // 
@@ -207,11 +240,16 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.label1.ForeColor = System.Drawing.Color.SeaShell;
-            this.label1.Location = new System.Drawing.Point(463, 14);
+            this.label1.Location = new System.Drawing.Point(454, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 17);
+            this.label1.Size = new System.Drawing.Size(207, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "copyright all right reserved";
+            this.label1.Text = "v1.1. / copyright all right reserved";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -222,6 +260,7 @@
             this.Controls.Add(this.panelMenu);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Corona Tracker";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -231,6 +270,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.HMIF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.panel5.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -250,6 +290,9 @@
         private System.Windows.Forms.Label Date;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
+        private FontAwesome.Sharp.IconButton exitButton;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

@@ -32,12 +32,14 @@
             this.ScanButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
             // 
             this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(23)))), ((int)(((byte)(69)))));
+            this.textBox1.ForeColor = System.Drawing.Color.SeaShell;
             this.textBox1.Location = new System.Drawing.Point(436, 280);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(258, 22);
@@ -81,12 +83,21 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Input day :";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(45, 303);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(237, 174);
+            this.textBox2.TabIndex = 6;
+            // 
             // Form2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(10)))), ((int)(((byte)(41)))));
             this.ClientSize = new System.Drawing.Size(1117, 579);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
@@ -106,5 +117,6 @@
         private System.Windows.Forms.Button ScanButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

@@ -21,10 +21,15 @@ namespace src
         public Form1()
         {
             InitializeComponent();
+            this.Height = Screen.PrimaryScreen.Bounds.Height;
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
             bottomBorder = new Panel();
             bottomBorder.Size = new Size(200, 3);
             panelMenu.Controls.Add(bottomBorder);
             OpenPage(new Form3());
+
         }
 
         private struct RGBColors
@@ -95,6 +100,7 @@ namespace src
         {
             ActivateButton(sender, RGBColors.color2);
             OpenPage(new Form2());
+            
         }
 
         private void ContactButton_Click(object sender, EventArgs e)
@@ -118,9 +124,20 @@ namespace src
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Clock.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
             Date.Text = DateTime.Now.ToLongDateString();
+            Clock.Text = DateTime.Now.ToLongTimeString();
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Clock.Text = DateTime.Now.ToLongTimeString();
+            timer1.Start();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
