@@ -168,20 +168,85 @@ namespace src
 
             // Debug Inisialisasi Queue Awal
             printQueueBFS(QueueBFS);
+
+            // Start Form dan Viewer Awal
+            Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+            //create a graph object 
+            Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
+            //create the graph content 
+            //create a form 
+            System.Windows.Forms.Form form = new System.Windows.Forms.Form();
+            //create a viewer object 
+            // End Form dan Viewer Awal
+
+            // Start of Setup Graph Awal
+            foreach (var item in listOfCity)
+            {
+                graph.AddNode(Convert.ToString(item.cityName));
+                var edited = graph.FindNode(Convert.ToString(item.cityName));
+                if (item.infected)
+                {
+                    edited.Attr.FillColor = Microsoft.Msagl.Drawing.Color.DarkRed;
+                }
+                else
+                {
+                    edited.Attr.FillColor = Microsoft.Msagl.Drawing.Color.DarkGreen;
+                }
+                edited.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
+            }
+
+            foreach (City item in this.listOfCity)
+            {
+                foreach (Neighbor item2 in item.listOfNeighbor)
+                {
+                    string temp1 = Convert.ToString(item.cityName);
+                    string temp2 = Convert.ToString(item2.neighborName);
+                    graph.AddEdge(temp1, temp2).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
+                }
+            }
+
+            string buffer = printQueueBFSBuffer(QueueBFS);
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.Active = true;
+            toolTip1.AutoPopDelay = 5000;
+            toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+            viewer.SetToolTip(toolTip1, buffer);
+            viewer.Graph = graph;
+            //associate the viewer with the form 
+            form.SuspendLayout();
+            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            form.Controls.Add(viewer);
+
+
+
+            form.Size = new System.Drawing.Size(1080, 720);
+
+            form.ResumeLayout();
+            //show the form 
+            form.ShowDialog();
+            // End of Viewing and Buffer Node (BFS Queue)
+            // End of Setup Graph Awal
+
+
             System.Console.WriteLine("============== PERSEBARAN DIMULAI =================");
 
             // Proses BFS
             while(QueueBFS.Count != 0)
             {
+                buffer = "";
                 Tuple<char, char> temp = QueueBFS.Dequeue();
                 char infectingCityName = temp.Item1;
                 char cityToInfectName = temp.Item2;
-                string buffer = "";
+                
+                
                 /* Kalo berhasil menginfeksi kota dan kota yang terinfeksi belum terinfeksi sebelumnya */
                 if ((listOfCity.Find(x=>x.cityName == infectingCityName).infecting(listOfCity.Find(x => x.cityName == infectingCityName).listOfNeighbor.Find(x => x.neighborName == cityToInfectName))) && (!listOfCity.Find(x => x.cityName == cityToInfectName).infected)){
 
                     System.Console.WriteLine("{0} berhasil menginfeksi {1}", infectingCityName, cityToInfectName);
-                    
+                    graph.AddEdge(Convert.ToString(infectingCityName), Convert.ToString(cityToInfectName)).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
+                    Microsoft.Msagl.Drawing.Node edited = graph.FindNode(Convert.ToString(cityToInfectName));
+                    edited.Attr.FillColor = Microsoft.Msagl.Drawing.Color.DarkRed;
                     /* ======================== QUEUE MANAGER ========================== */
 
                     /* Tambahkan <kota terinfeksi,tetangga dari kota terinfeksi> ke dalam queue */
@@ -195,6 +260,7 @@ namespace src
                     }
                     /* Debug Queue */ 
                         printQueueBFS(QueueBFS);
+                    
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
 
                     /* ====================== ATTRIBUTE CHANGE MANAGER =========================== */
@@ -216,6 +282,7 @@ namespace src
 
                     System.Console.WriteLine("Kota {0} sudah terinfeksi sebelumnya! Serangan tidak akan berpengaruh", cityToInfectName);
                     printQueueBFS(QueueBFS);
+                    
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
                 }
 
@@ -224,58 +291,42 @@ namespace src
 
                     System.Console.WriteLine("{0} tidak berhasil menginfeksi {1}", infectingCityName, cityToInfectName);
                     printQueueBFS(QueueBFS);
+                    
+                    
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
                 }
-                Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-                //create a graph object 
-                Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
-                //create the graph content 
-                //create a form 
-                System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-                //create a viewer object 
-                foreach (City item in this.listOfCity)
-                {
-                    foreach (Neighbor item2 in item.listOfNeighbor)
-                    {
-                        string temp1 = Convert.ToString(item.cityName);
-                        string temp2 = Convert.ToString(item2.neighborName);
-                        if (item.infectedFrom == item2.neighborName)
-                        {
-                            graph.AddEdge(temp2, temp1).Attr.Color = Microsoft.Msagl.Drawing.Color.Red;
 
-                        }
-                        else
-                        {
-                            graph.AddEdge(temp1, temp2).Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-                        }
-                        if (item.infected)
-                        {
-                            Microsoft.Msagl.Drawing.Node edited = graph.FindNode(temp1);
-                            edited.Attr.FillColor = Microsoft.Msagl.Drawing.Color.DarkRed;
-                            edited.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-                        }
-                        else
-                        {
-                            Microsoft.Msagl.Drawing.Node edited = graph.FindNode(temp1);
-                            edited.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Circle;
-                        }
-                    }
 
-                }
-                Microsoft.Msagl.Drawing.Node bfsDisplay= graph.AddNode(buffer);
-                bfsDisplay.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Plaintext;
+                //Microsoft.Msagl.Drawing.Node bfsDisplay= graph.AddNode(buffer);
+
+                //bfsDisplay.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Plaintext;
+
+
+                // Start of Viewing and Buffer Node (BFS Queue)
+
+                //Microsoft.Msagl.Drawing.Node remover = graph.FindNode(buffer);
+                //graph.RemoveNode(remover);
+                //Microsoft.Msagl.Drawing.Node bfsDisplay= graph.AddNode(buffer);
+
+                //bfsDisplay.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Plaintext;
                 //bind the graph to the viewer 
+                
+                
+                viewer.SetToolTip(toolTip1, buffer);
                 viewer.Graph = graph;
                 //associate the viewer with the form 
                 form.SuspendLayout();
                 viewer.Dock = System.Windows.Forms.DockStyle.Fill;
                 form.Controls.Add(viewer);
+
+                
+
                 form.Size = new System.Drawing.Size(1080, 720);
 
                 form.ResumeLayout();
                 //show the form 
                 form.ShowDialog();
-                
+                // End of Viewing and Buffer Node (BFS Queue)
             }
             this.printAll();   
         }
