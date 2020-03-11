@@ -42,7 +42,7 @@
             this.textBox1.ForeColor = System.Drawing.Color.SeaShell;
             this.textBox1.Location = new System.Drawing.Point(436, 280);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(258, 22);
+            this.textBox1.Size = new System.Drawing.Size(258, 20);
             this.textBox1.TabIndex = 3;
             // 
             // ScanButton
@@ -67,7 +67,7 @@
             this.label1.ForeColor = System.Drawing.Color.SeaShell;
             this.label1.Location = new System.Drawing.Point(305, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(542, 57);
+            this.label1.Size = new System.Drawing.Size(443, 45);
             this.label1.TabIndex = 4;
             this.label1.Text = "TRACK CORONA VIRUS";
             // 
@@ -79,17 +79,21 @@
             this.label2.ForeColor = System.Drawing.Color.SeaShell;
             this.label2.Location = new System.Drawing.Point(432, 243);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 21);
+            this.label2.Size = new System.Drawing.Size(85, 19);
             this.label2.TabIndex = 5;
             this.label2.Text = "Input day :";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(45, 303);
+            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.textBox2.ForeColor = System.Drawing.Color.Black;
+            this.textBox2.Location = new System.Drawing.Point(625,650);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(237, 174);
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox2.Size = new System.Drawing.Size(500, 318);
             this.textBox2.TabIndex = 6;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Form2
             // 

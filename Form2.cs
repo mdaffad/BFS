@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace src
 {
@@ -21,6 +22,18 @@ namespace src
         {
             int input = Convert.ToInt32(textBox1.Text);
             Diagram objectDiagram = new Diagram(input);
+            string[] lines = File.ReadAllLines("LogFile.txt");
+            string buffer = "";
+            foreach (var item in lines)
+            {
+                buffer = buffer + Environment.NewLine + item;
+            }
+            textBox2.Text = buffer;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
