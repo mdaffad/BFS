@@ -75,9 +75,9 @@
             this.Date.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Date.Font = new System.Drawing.Font("Century Gothic", 7F);
             this.Date.ForeColor = System.Drawing.Color.SeaShell;
-            this.Date.Location = new System.Drawing.Point(0, 543);
+            this.Date.Location = new System.Drawing.Point(0, 539);
             this.Date.Name = "Date";
-            this.Date.Size = new System.Drawing.Size(31, 15);
+            this.Date.Size = new System.Drawing.Size(37, 17);
             this.Date.TabIndex = 5;
             this.Date.Text = "DATE";
             // 
@@ -86,9 +86,9 @@
             this.Clock.AutoSize = true;
             this.Clock.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Clock.ForeColor = System.Drawing.Color.SeaShell;
-            this.Clock.Location = new System.Drawing.Point(0, 558);
+            this.Clock.Location = new System.Drawing.Point(0, 556);
             this.Clock.Name = "Clock";
-            this.Clock.Size = new System.Drawing.Size(47, 21);
+            this.Clock.Size = new System.Drawing.Size(51, 23);
             this.Clock.TabIndex = 4;
             this.Clock.Text = "TIME";
             // 
@@ -242,7 +242,7 @@
             this.label1.ForeColor = System.Drawing.Color.SeaShell;
             this.label1.Location = new System.Drawing.Point(454, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 15);
+            this.label1.Size = new System.Drawing.Size(207, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "v1.1. / copyright all right reserved";
             // 

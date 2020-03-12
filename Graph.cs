@@ -126,6 +126,8 @@ namespace src
                     neighbor.displayNeighbor();
                 }
                 System.Console.WriteLine("=========================");
+                System.Console.WriteLine();
+
             }
         }
 
@@ -144,7 +146,7 @@ namespace src
             string buffer = "Queue : {";
             foreach (Tuple<char, char> elmt in QueueBFS)
             {
-                System.Console.Write("<" + elmt.Item1 + "," + elmt.Item2 + ">");
+            //   System.Console.Write("<" + elmt.Item1 + "," + elmt.Item2 + ">");
                 buffer = buffer + "<" + elmt.Item1 + "," + elmt.Item2 + ">";
             }
             buffer = buffer + "}";
@@ -157,7 +159,8 @@ namespace src
             Queue<Tuple<char, char>> QueueBFS = new Queue<Tuple<char, char>>();
             listOfCity.Find(x => x.cityName == this.initialCity).infected = true;
             listOfCity.Find(x => x.cityName == this.initialCity).infectedPopulation = listOfCity.Find(x => x.cityName == this.initialCity).calcInfected();
-
+            
+            System.Console.WriteLine("============== KONDISI AWAL ==============");
             this.printAll();
             
             foreach (Neighbor neighbor in listOfCity.Find(x => x.cityName == this.initialCity).listOfNeighbor)
@@ -167,7 +170,6 @@ namespace src
             }
 
             // Debug Inisialisasi Queue Awal
-            printQueueBFS(QueueBFS);
 
             // Start Form dan Viewer Awal
             Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
@@ -228,11 +230,13 @@ namespace src
             // End of Viewing and Buffer Node (BFS Queue)
             // End of Setup Graph Awal
 
-
+            System.Console.WriteLine();
             System.Console.WriteLine("============== PERSEBARAN DIMULAI =================");
+            printQueueBFS(QueueBFS);
+
 
             // Proses BFS
-            while(QueueBFS.Count != 0)
+            while (QueueBFS.Count != 0)
             {
                 buffer = "";
                 Tuple<char, char> temp = QueueBFS.Dequeue();
@@ -258,8 +262,6 @@ namespace src
                         
                         QueueBFS.Enqueue(newTuple);
                     }
-                    /* Debug Queue */ 
-                        printQueueBFS(QueueBFS);
                     
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
 
@@ -275,13 +277,17 @@ namespace src
                     {
                         listOfCity.Find(x => x.cityName == cityToInfectName).infectedFrom = infectingCityName;
                     }
+
+                    /* Debug Queue */
+                    //printQueueBFS(QueueBFS);
+
                 }
 
                 /* Kalo kota yang akan diinfeksi sudah terinfeksi sebelumnya */
                 else if (listOfCity.Find(x => x.cityName == cityToInfectName).infected){
 
                     System.Console.WriteLine("Kota {0} sudah terinfeksi sebelumnya! Serangan tidak akan berpengaruh", cityToInfectName);
-                    printQueueBFS(QueueBFS);
+                    //printQueueBFS(QueueBFS);
                     
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
                 }
@@ -290,7 +296,7 @@ namespace src
                 else {
 
                     System.Console.WriteLine("{0} tidak berhasil menginfeksi {1}", infectingCityName, cityToInfectName);
-                    printQueueBFS(QueueBFS);
+                    //printQueueBFS(QueueBFS);
                     
                     
                     buffer = buffer + printQueueBFSBuffer(QueueBFS);
@@ -327,7 +333,13 @@ namespace src
                 //show the form 
                 form.ShowDialog();
                 // End of Viewing and Buffer Node (BFS Queue)
+                System.Console.WriteLine();
+                printQueueBFS(QueueBFS);
             }
+            System.Console.WriteLine("============== PERSEBARAN SELESAI ==============");
+            System.Console.WriteLine();
+
+            System.Console.WriteLine("============== KONDISI AKHIR ==============");
             this.printAll();   
         }
     }
